@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String      @id @default(cuid())
+  name      String
+  email     String      @unique
+  password  String
+  bio       String?
+  role      String      @default("STUDENT") // STUDENT or TEAM_LEADER
+  skills    UserSkill[]
+  projects  Project[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model Skill {
+  id          String               @id @default(cuid())
+  name        String               @unique
+  users       UserSkill[]
+  projectReqs ProjectRequirement[]
+}
+
+model UserSkill {
+  id      String @id @default(cuid())
+  userId  String
+  skillId String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill   Skill  @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, skillId])
+}
+
+model Project {
+  id           String               @id @default(cuid())
+  title        String
+  description  String
+  status       String               @default("OPEN") // OPEN or CLOSED
+  creatorId    String
+  creator      User                 @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  requirements ProjectRequirement[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+}
+
+model ProjectRequirement {
+  id        String  @id @default(cuid())
+  projectId String
+  skillId   String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  skill     Skill   @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, skillId])
+}
