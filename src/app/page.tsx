@@ -15,7 +15,7 @@ export default function Home() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: any = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,

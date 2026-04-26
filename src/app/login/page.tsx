@@ -83,7 +83,7 @@ export default function LoginPage() {
         </form>
 
         <p style={{ textAlign: "center", color: "var(--text-secondary)" }}>
-          Don't have an account? <Link href="/register" style={{ color: "var(--neon-accent)", fontWeight: "600" }}>Register here</Link>
+          Don&apos;t have an account? <Link href="/register" style={{ color: "var(--neon-accent)", fontWeight: "600" }}>Register here</Link>
         </p>
       </motion.div>
     </div>

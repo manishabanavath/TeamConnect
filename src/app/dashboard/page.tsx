@@ -76,7 +76,7 @@ export default function DashboardPage() {
             <Folder size={24} />
             <h2 style={{ fontSize: "1.5rem", margin: 0 }}>My Projects</h2>
           </div>
-          <p style={{ color: "var(--text-secondary)" }}>You haven't created any projects yet. Start one to find team members!</p>
+          <p style={{ color: "var(--text-secondary)" }}>You haven&apos;t created any projects yet. Start one to find team members!</p>
           {/* List of user's projects would go here */}
         </div>
 
